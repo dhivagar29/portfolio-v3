@@ -247,10 +247,10 @@ export function startOrbitScene(canvas: HTMLCanvasElement, options: OrbitSceneOp
     wide = W >= 900
 
     R = wide ? clamp(W * 0.95, 900, 1900) : clamp(W * 1.7, 600, 1300)
-    apex = wide ? clamp(H * 0.2, 130, 220) : clamp(H * 0.15, 96, 150)
+    apex = wide ? clamp(H * 0.17, 120, 190) : clamp(H * 0.15, 96, 150)
     cx = W * (wide ? 0.56 : 0.5)
     cy = H - apex + R
-    orbitR = R + (wide ? 104 : 68)
+    orbitR = R + (wide ? 76 : 68)
 
     const toAngle = (x: number, radius: number) => Math.asin(clamp((x - cx) / radius, -1, 1))
     angleMin = toAngle(-40, orbitR)

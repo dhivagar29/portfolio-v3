@@ -75,7 +75,13 @@
 }
 
 .hero__eyebrow-pipe {
+  display: none;
   color: var(--line-strong);
+}
+
+/* Narrow screens: role and stack on their own lines, no dangling separator. */
+.hero__eyebrow-stack {
+  display: block;
 }
 
 .hero__name {
@@ -219,7 +225,9 @@
 .hero__cue {
   position: absolute;
   right: var(--gutter);
-  bottom: 22px;
+  /* Sits on the status line, above the orbit zone, so it never overlaps the
+     canvas or falls below the fold when the hero is taller than the viewport. */
+  bottom: calc(var(--orbit-zone) - 4px);
   display: none;
   align-items: center;
   gap: 12px;
@@ -301,12 +309,20 @@
 
 @media (min-width: 900px) {
   .hero {
-    --orbit-zone: clamp(236px, 30svh, 300px);
+    --orbit-zone: clamp(260px, 32svh, 320px);
   }
 
   .hero__eyebrow {
     max-width: none;
     font-size: 0.75rem;
+  }
+
+  .hero__eyebrow-pipe {
+    display: inline;
+  }
+
+  .hero__eyebrow-stack {
+    display: inline;
   }
 
   .hero__name {
