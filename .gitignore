@@ -5,3 +5,6 @@ dist
 run*.json
 run*.err
 INPUT.md
+shots/
+review-shots/
+*.patch
