@@ -1,0 +1,163 @@
+/* Animatable custom properties (browsers without @property just skip the tween). */
+@property --torch {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --spin {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes rise {
+  from {
+    transform: translate3d(0, 108%, 0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+}
+
+@keyframes sweep {
+  from {
+    background-position:
+      0 0,
+      150% 0;
+  }
+  to {
+    background-position:
+      0 0,
+      -50% 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes ping {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  70%,
+  100% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+
+@keyframes cue {
+  0% {
+    transform: translateX(-100%);
+  }
+  55%,
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes flow-x {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@keyframes flow-y {
+  from {
+    background-position: 0 100%;
+  }
+  to {
+    background-position: 0 -100%;
+  }
+}
+
+@keyframes spin {
+  to {
+    --spin: 360deg;
+  }
+}
+
+@keyframes turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---- Scroll reveals (armed by src/lib/useReveal.ts) ---- */
+
+.reveal-on [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.9s var(--ease-out),
+    transform 0.9s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+
+.reveal-on [data-reveal='rise'] {
+  transform: translate3d(0, 0.5em, 0);
+  clip-path: inset(0 0 100% 0);
+  transition:
+    opacity 0.5s ease-out,
+    transform 1.1s var(--ease-out),
+    clip-path 1.1s var(--ease-out);
+}
+
+.reveal-on [data-reveal][data-revealed] {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-on [data-reveal='rise'][data-revealed] {
+  clip-path: inset(-0.2em -0.1em -0.25em -0.1em);
+}
+
+.reveal-on [data-reveal][data-revealed='instant'] {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ---- Reduced motion: no movement, everything in its final state ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-on [data-reveal] {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+
+  .magnetic > * {
+    transform: none;
+  }
+
+  .hero__name-word--outline {
+    background-position:
+      0 0,
+      50% 0;
+  }
+}

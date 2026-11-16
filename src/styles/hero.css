@@ -1,0 +1,323 @@
+.hero {
+  --orbit-zone: clamp(232px, 33svh, 280px);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-top: calc(var(--header-h) + clamp(20px, 5svh, 56px));
+  padding-bottom: var(--orbit-zone);
+  overflow: hidden;
+  overflow: clip;
+}
+
+/* Horizon glow that stands in until (or instead of) the canvas. */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: -3;
+  height: 46%;
+  background:
+    radial-gradient(90% 70% at 50% 108%, rgba(var(--cyan-rgb), 0.16), transparent 70%),
+    radial-gradient(60% 50% at 70% 100%, rgba(var(--hot-rgb), 0.1), transparent 70%);
+}
+
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-mono);
+  opacity: 0;
+  transition: opacity 1.6s ease-out;
+  -webkit-mask-image: linear-gradient(#000 86%, transparent);
+  mask-image: linear-gradient(#000 86%, transparent);
+}
+
+.hero__canvas[data-ready] {
+  opacity: 1;
+}
+
+/* Scanlines and a soft vignette over the backdrop. */
+.hero__scan {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom, rgba(180, 200, 255, 0.035) 0 1px, transparent 1px 4px),
+    radial-gradient(120% 90% at 30% 30%, transparent 40%, rgba(4, 5, 11, 0.55) 100%);
+  -webkit-mask-image: linear-gradient(#000 60%, transparent);
+  mask-image: linear-gradient(#000 60%, transparent);
+}
+
+.hero__inner {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero__eyebrow {
+  max-width: 34em;
+  font: 500 0.6875rem/1.7 var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.hero__eyebrow-role {
+  color: var(--cyan);
+}
+
+.hero__eyebrow-pipe {
+  color: var(--line-strong);
+}
+
+.hero__name {
+  margin-top: clamp(14px, 2.4svh, 26px);
+  margin-left: -0.045em;
+  font: 700 clamp(3.2rem, 17.6vw, 7.5rem) / 0.86 var(--font-display);
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.hero__name-line {
+  display: block;
+  /* Room for the outline stroke; the negative margin keeps the lines tight. */
+  padding: 0.06em 0.06em 0.05em 0.045em;
+  margin: -0.06em -0.06em -0.05em -0.045em;
+  overflow: hidden;
+  overflow: clip;
+}
+
+.hero__name-word {
+  display: inline-block;
+  white-space: nowrap;
+  background: linear-gradient(180deg, #ffffff 30%, #b9c8ff 115%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Surname: outlined, with light passing through it (and a pointer torch on desktop). */
+.hero__name-word--outline {
+  --tx: 50%;
+  --ty: 50%;
+  -webkit-text-stroke: 1.5px rgba(214, 226, 255, 0.92);
+  background:
+    radial-gradient(
+      circle 4.2em at var(--tx) var(--ty),
+      rgba(var(--cyan-rgb), var(--torch, 0)),
+      rgba(var(--violet-rgb), calc(var(--torch, 0) * 0.55)) 55%,
+      transparent 75%
+    ),
+    linear-gradient(
+        100deg,
+        transparent 35%,
+        rgba(var(--cyan-rgb), 0.55) 48%,
+        rgba(var(--violet-rgb), 0.5) 54%,
+        transparent 66%
+      )
+      0 0 / 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition: --torch 0.4s;
+}
+
+.hero__name-word--outline[data-lit] {
+  --torch: 0.95;
+}
+
+.hero__title {
+  margin-top: clamp(18px, 3svh, 30px);
+  font: 500 clamp(1.0625rem, 2.1vw, 1.5rem) / 1.3 var(--font-display);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.hero__at {
+  color: var(--ink-3);
+}
+
+.hero__org {
+  font-weight: 700;
+  color: var(--cyan);
+}
+
+.hero__links {
+  margin-top: 4px;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: clamp(14px, 2.2svh, 24px);
+}
+
+.hero__status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  margin-top: clamp(20px, 3.4svh, 36px);
+  font: 400 0.75rem/1.4 var(--font-mono);
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+}
+
+.hero__loc {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.hero__loc-zone {
+  padding-left: 10px;
+  border-left: 1px solid var(--line-strong);
+  color: var(--ink-3);
+}
+
+.clock {
+  min-width: 8ch;
+  font-variant-numeric: tabular-nums;
+  color: var(--cyan-soft);
+}
+
+.hero__tagline {
+  display: flex;
+  gap: 0.7em;
+  color: var(--ink);
+}
+
+.hero__tagline-prompt {
+  color: var(--hot);
+}
+
+.typed {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.typed__ghost {
+  visibility: hidden;
+}
+
+.typed__live {
+  position: absolute;
+  inset: 0 auto 0 0;
+}
+
+.hero__cue {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 22px;
+  display: none;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  font: 500 0.6875rem/1 var(--font-mono);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.hero__cue-line {
+  position: relative;
+  width: 56px;
+  height: 1px;
+  background: var(--line-strong);
+  overflow: hidden;
+}
+
+.hero__cue-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--cyan);
+  animation: cue 2.4s var(--ease-in-out) infinite;
+}
+
+/* Load-in sequence. */
+.hero__name-word {
+  animation: rise 1.15s var(--ease-out) both;
+}
+
+.hero__name-line:first-child .hero__name-word {
+  animation-delay: 0.05s;
+}
+
+.hero__name-word--outline {
+  animation:
+    rise 1.15s var(--ease-out) 0.16s both,
+    sweep 7s linear 1.6s infinite;
+}
+
+.hero__eyebrow,
+.hero__title,
+.hero__links,
+.hero__actions,
+.hero__status {
+  animation: fade-up 0.9s var(--ease-out) both;
+}
+
+.hero__eyebrow {
+  animation-delay: 0.1s;
+}
+
+.hero__title {
+  animation-delay: 0.42s;
+}
+
+.hero__links {
+  animation-delay: 0.5s;
+}
+
+.hero__actions {
+  animation-delay: 0.58s;
+}
+
+.hero__status {
+  animation-delay: 0.7s;
+}
+
+@media (min-width: 640px) {
+  .hero__name {
+    font-size: min(15.2vw, 21svh, 10rem);
+  }
+
+  .hero__cue {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    --orbit-zone: clamp(236px, 30svh, 300px);
+  }
+
+  .hero__eyebrow {
+    max-width: none;
+    font-size: 0.75rem;
+  }
+
+  .hero__name {
+    font-size: min(11.6vw, 17.5svh, 13rem);
+  }
+
+  .hero__name-word--outline {
+    -webkit-text-stroke-width: 2px;
+  }
+
+  .hero__status {
+    font-size: 0.8125rem;
+  }
+}

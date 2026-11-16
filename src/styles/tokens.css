@@ -1,0 +1,59 @@
+:root {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg: #04050b;
+  --bg-raise: #080a18;
+  --panel: rgba(12, 16, 38, 0.6);
+  --panel-solid: #0a0d20;
+
+  /* Text (all pass WCAG AA on --bg and on panels) */
+  --ink: #eef1fb;
+  --ink-2: #bcc3db;
+  --ink-3: #8c95b4;
+
+  /* Lines */
+  --line: rgba(142, 160, 255, 0.14);
+  --line-strong: rgba(142, 160, 255, 0.3);
+
+  /* Accents */
+  --cyan: #35f0ff;
+  --cyan-rgb: 53, 240, 255;
+  --cyan-soft: #a4f8ff;
+  --violet: #7a5cff;
+  --violet-rgb: 122, 92, 255;
+  --violet-soft: #b6aaff;
+  --hot: #ff5a2b;
+  --hot-rgb: 255, 90, 43;
+  --hot-soft: #ff9670;
+
+  /* Type */
+  --font-display: 'Space Grotesk', 'Space Grotesk Fallback', system-ui, sans-serif;
+  --font-body: 'Inter', 'Inter Fallback', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Layout */
+  --gutter: 20px;
+  --container: 1240px;
+  --header-h: 64px;
+  --radius: 14px;
+  --radius-sm: 8px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.2, 1.5, 0.4, 1);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 40px;
+    --header-h: 72px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --gutter: 64px;
+  }
+}
