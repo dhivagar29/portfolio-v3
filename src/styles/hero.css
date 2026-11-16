@@ -301,7 +301,7 @@
 
 @media (min-width: 900px) {
   .hero {
-    --orbit-zone: clamp(236px, 30svh, 300px);
+    --orbit-zone: clamp(260px, 32svh, 320px);
   }
 
   .hero__eyebrow {
