@@ -265,7 +265,7 @@ export const earlierRoles: Role[] = [
     client: 'Clients: Cigna and Health Care Service Corporation',
     bullets: [
       {
-        text: 'Deployed containerised web applications to Kubernetes on AWS and GCP; Ansible playbooks across stages',
+        text: 'Deployed containerised web applications to Kubernetes on AWS and GCP using automated processes; developed Ansible playbooks for resource management across multiple stages',
       },
       {
         text: 'Continuous builds producing Docker images for container-based deployments to Kubernetes',
